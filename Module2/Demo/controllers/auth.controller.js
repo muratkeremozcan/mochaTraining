@@ -9,7 +9,9 @@ function AuthController(){
     }
 
     function isAuthorizedAsync(neededRole, cb){
-        setTimeout(function(){cb(roles.indexOf(neededRole) >= 0)}, 0);  
+        setTimeout(function(){ // set time out
+            cb(roles.indexOf(neededRole) >= 0) // call the call back when timeout is
+        }, 1000);
     }
     return {isAuthorized, isAuthorizedAsync, setRoles};
 }

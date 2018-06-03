@@ -16,17 +16,16 @@ describe('AuthController', function () {
         })
         it('Should return true if authorized', function () {
             authController.setRoles(['user', 'admin']);
-            assert.equal(true, authController.isAuthorized('admin'));
+            assert.equal(true, authController.isAuthorized('user'));
         })
         it('should not allow a get if not authorized');
         it('should allow get if authorized');
     })
     describe('isAuthorizedAsync', function () {
 
-        it('Should return false if not authorized', function (done) {
-            authController.isAuthorizedAsync('admin',
-                function (isAuth) {
-                    assert.equal(false, isAuth);
+        it('async: Should return false if not authorized', function (done) {
+            authController.isAuthorizedAsync('user', function (isAuth) { // isAuth is a callback function, returns true if 
+                    assert.equal(true, isAuth); // the needed role exists in the array of roles (setRoles in before)
                     done();
                 });
 
