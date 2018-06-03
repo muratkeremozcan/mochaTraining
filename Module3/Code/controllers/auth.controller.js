@@ -13,7 +13,7 @@ function AuthController(){
     }
     function isAuthorizedPromise(neededRole, cb){
         return new Promise(function(resolve){
-            setTimeout(function(){resolve(roles.indexOf(neededRole) >= 0)}, 0); 
+            setTimeout(function(){resolve(roles.indexOf(neededRole) >= 0)}, 100); 
         });
          
     }

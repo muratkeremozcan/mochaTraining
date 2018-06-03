@@ -23,6 +23,7 @@ describe('AuthController', function () {
             authController.setRoles(['user', 'admin']);
             var isAuth = authController.isAuthorized('admin');
             isAuth.should.be.true;
+            // expect(isAuth).to.be.false;
         })
         it('should not allow a get if not authorized');
         it('should allow get if authorized');
@@ -43,9 +44,7 @@ describe('AuthController', function () {
 
         it('Should return false if not authorized', function () {
            return authController.isAuthorizedPromise('admin').should.eventually.be.false;
-
         })
-        
     })
 
 });
