@@ -1,7 +1,7 @@
 var chai = require('chai'),
     sinon = require('sinon'),
     https = require('https');
-var PassThrough = require('stream').PassThrough;
+var PassThrough = require('stream').PassThrough; // to mock a stream for us
 
 var gitJson = {
     login: "jonathanfmills",
@@ -129,14 +129,14 @@ chai.should();
 var gitService = require('../../services/gitService')();
 
 describe('GitService', function () {
-    describe.only('GetUser', function () {
+    describe('GetUser', function () {
         beforeEach(function () {
-            this.request = sinon.stub(https, 'request');
+            this.request = sinon.stub(https, 'request'); // var stub = sinon.stub(object, 'method')
         });
         it('should return user and repos', function () {
-            this.timeout(10000);
-            var gitResponse = new PassThrough();
-            gitResponse.write(JSON.stringify(gitJson));
+            this.timeout(20000);
+            var gitResponse = new PassThrough(); // new passThrough
+            gitResponse.write(JSON.stringify(gitJson)); // write a json representation of the gitJson object
             gitResponse.end();
 
             var repoResponse = new PassThrough();
@@ -144,10 +144,10 @@ describe('GitService', function () {
             repoResponse.end();
 
             this.request
-            .onFirstCall().callsArgWith(1, gitResponse).returns(new PassThrough())
+            .onFirstCall().callsArgWith(1, gitResponse).returns(new PassThrough()) // call the 1st argument with gitResponse
             .onSecondCall().callsArgWith(1, repoResponse).returns(new PassThrough());
             
-            //https.request = {};
+            // https.request = {};
             return gitService.getUser('jonathanmills').then(
                  (user) => {
                     var params = this.request.getCall(0).args;
@@ -160,7 +160,7 @@ describe('GitService', function () {
             );
         })
         afterEach(function () {
-            this.request.restore();
+            this.request.restore(); // undo to https what you did with stub
         });
     })
 });

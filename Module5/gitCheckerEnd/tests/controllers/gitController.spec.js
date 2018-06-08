@@ -11,11 +11,11 @@ var getUser;
 describe('gitController', function(){
     beforeEach(function(){
         var gitService = GitCtrl.__get__('gitService');
-        getUser = sinon.spy(gitService, 'getUser');
-        GitCtrl.__set__('gitService', gitService);
+        getUser = sinon.spy(gitService, 'getUser'); // observe with spy
+        GitCtrl.__set__('gitService', gitService); // set it back
     } );
     it('should get user and repos from git service', function(done){
-        this.timeout(10000);
+        this.timeout(20000);
         var req = {params:{userId:'jonathanfmills'}};
 
         var res = {json: test};

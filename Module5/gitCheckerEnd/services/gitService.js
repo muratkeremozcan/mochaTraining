@@ -27,7 +27,7 @@ module.exports = function () {
     }
     var getUser = function (userId) {
         return new Promise(function(resolve){
-           // console.log('getUser');
+           console.log('getUser');
             var options = {
                 host: 'api.github.com',
                 path: `/users/${userId}`,
@@ -35,18 +35,18 @@ module.exports = function () {
             };
 
             var callback = function (response) {
-               // console.log('callback');
+               console.log('callback');
                 var str = '';
 
                 response.on('data', function (chunk) {
-                    //console.log('chunk');
+                    console.log('chunk');
                     str += chunk;
                 });
 
                 response.on('end', function () {
                     var user = JSON.parse(str);
                     getRepos(userId, function (repos) {
-                       //console.log('repos');
+                       console.log('repos');
                         user.repos = repos;
                         resolve(user);
                     })
